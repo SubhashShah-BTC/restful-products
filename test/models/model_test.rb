@@ -10,9 +10,4 @@ class ModelTest < ActiveSupport::TestCase
     model = Model.new(name: "322")
     assert model.save
   end
-
-  test "must return valid json" do
-    model = models(:model_111)
-    assert_equal {name: "111"}, model.to_json
-  end
 end
