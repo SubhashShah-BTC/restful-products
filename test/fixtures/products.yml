@@ -1,0 +1,10 @@
+uncategorized:
+  name: "Uncategorized"
+
+with_categories:
+  name: "Categorized product"
+  categories: parts, pipes
+
+with_tags:
+  name: "Tagged product"
+  tags: pipes, parts

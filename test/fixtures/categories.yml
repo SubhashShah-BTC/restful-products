@@ -1,0 +1,8 @@
+hardware:
+  name: hardware
+
+pipes:
+  name: pipes
+
+parts:
+  name: parts
