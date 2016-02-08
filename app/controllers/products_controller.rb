@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
 
   before_action :update_categories_tags, only: [:update]
+  before_action :populate_data, only: [:edit, :update]
 
   def index
     @products = Product.includes(:categories, :tags, :images, var: :models).all
@@ -8,10 +9,6 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find(params[:id])
-    @tags = Tag.all
-    @categories = Category.all
-    @colors = Var.colors
-    @models = Model.all
   end
 
   def update
@@ -21,7 +18,7 @@ class ProductsController < ApplicationController
       flash[:success] = "Product updated successfully."
       redirect_to products_path
     else
-      flash.now[:danger] = product.errors.full_messages.join("\n")
+      flash.now[:danger] = @product.errors.full_messages.join("\n")
       render "edit"
     end
   end
@@ -40,5 +37,12 @@ class ProductsController < ApplicationController
     params[:product][:category_ids] ||= []
     params[:product][:tag_ids] ||= []
     params[:product][:var][:model_ids] ||= []
+  end
+
+  def populate_data
+    @tags = Tag.all
+    @categories = Category.all
+    @colors = Var.colors
+    @models = Model.all
   end
 end

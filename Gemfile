@@ -48,6 +48,7 @@ end
 group :test do
   # Clean up database before every test
   gem 'database_cleaner'
+  gem 'minitest-rails-capybara'
 end
 
 group :development do
