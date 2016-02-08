@@ -28,13 +28,17 @@ ActiveRecord::Schema.define(version: 20160208063313) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.string   "img_path"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
+    t.integer  "product_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "models", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -45,14 +49,14 @@ ActiveRecord::Schema.define(version: 20160208063313) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.string   "name",          null: false
+    t.string   "name",                                  null: false
     t.date     "expire_date"
     t.integer  "collection_id"
     t.string   "SKU_ID"
-    t.integer  "price"
+    t.decimal  "price",         precision: 8, scale: 2
     t.string   "description"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   create_table "products_tags", force: :cascade do |t|
@@ -68,6 +72,7 @@ ActiveRecord::Schema.define(version: 20160208063313) do
 
   create_table "vars", force: :cascade do |t|
     t.integer  "color"
+    t.integer  "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

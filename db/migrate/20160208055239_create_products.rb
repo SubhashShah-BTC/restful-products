@@ -5,7 +5,7 @@ class CreateProducts < ActiveRecord::Migration
       t.date :expire_date
       t.integer :collection_id
       t.string :SKU_ID
-      t.integer :price
+      t.decimal :price, precision: 8, scale: 2
       t.string :description
 
       t.timestamps null: false
