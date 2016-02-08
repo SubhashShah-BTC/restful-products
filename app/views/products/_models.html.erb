@@ -1,0 +1,8 @@
+<table>
+  <% models.each do |model| %>
+    <tr>
+      <td><%= check_box_tag "product[var][model_ids][]", model.id, product.var.models.include?(model) %></td>
+      <td><%= model.name %></td>
+    </tr>
+  <% end %>
+</table>

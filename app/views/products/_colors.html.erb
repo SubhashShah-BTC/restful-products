@@ -1,0 +1,8 @@
+<table>
+  <% colors.each do |color| %>
+    <tr>
+      <td><%= radio_button_tag "product[var][color]", color[0], product.var.color == color[0] %></td>
+      <td><%= color[0].titleize %></td>
+    </tr>
+  <% end %>
+</table>

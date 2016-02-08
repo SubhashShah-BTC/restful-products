@@ -1,0 +1,7 @@
+<table>
+   <% product.images.each do |image| %>
+    <tr>
+      <td><%= image_tag image.img.url(:thumb) %></td>
+    </tr>
+  <% end %>
+</table>

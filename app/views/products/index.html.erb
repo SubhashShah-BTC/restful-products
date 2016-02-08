@@ -1,0 +1,17 @@
+<h1>Products</h1>
+<table border=1 width="100%">
+  <tr>
+    <th>Name</th>
+    <th>SKU_ID</th>
+    <th>Price</th>
+    <th>Picture</th>
+  </tr>
+  <% @products.each do |product| %>
+    <tr>
+      <td width="25%" align="center"><%= link_to product.name, edit_product_url(product) %></td>
+      <td width="25%" align="center"><%= product.SKU_ID %></td>
+      <td width="25%" align="center"><%= product.price %></td>
+      <td width="25%" align="center"><%= image_tag product.images.first.img.url(:thumb) unless product.images.empty? %></td>
+    </tr>
+  <% end %>
+</table>
