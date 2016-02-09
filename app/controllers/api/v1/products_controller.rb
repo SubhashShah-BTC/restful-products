@@ -5,15 +5,15 @@ class Api::V1::ProductsController < ApplicationController
   def create
     Product.transaction do
       product = Product.new(product_params)
-      product.tags = @tags
-      product.categories = @categories
-      product.var = @vars
-      product.images = @images
+      product.tags = @tags if params[:tags].present?
+      product.categories = @categories if params[:categories].present?
+      product.var = @vars  if params[:vars].present?
+      product.images = @images  if params[:images].present?
       product.price /= 100 if product.price.present? && product.price > 0
       if product.save
-        render json: {status: :success}
+        render json: "Product saved successfully", status: 200
       else
-        render json: {status: :unprocessable_entity, errors: product.errors.full_messages}
+        render json: product.errors.full_messages, status: 422
       end
     end
   end
@@ -25,7 +25,7 @@ class Api::V1::ProductsController < ApplicationController
   end
 
   def var_params
-    params[:vars].permit(:color)
+    params.require(:vars).permit(:color) if params[:vars].present?
   end
 
   def process_params
@@ -44,6 +44,7 @@ class Api::V1::ProductsController < ApplicationController
   end
 
   def create_vars
+    return if params[:vars].blank?
     models = params[:vars][:models].inject([]) { |models, model_name| models << Model.find_or_initialize_by(name: model_name) } if params[:vars].present? && params[:vars][:models].present?
     @vars = Var.create(var_params)
     @vars.models = models
