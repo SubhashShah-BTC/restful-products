@@ -1,4 +1,4 @@
-# restful-products
+# json-api-app
 
 An application to create products using public REST API with admin interface to list products.
 
